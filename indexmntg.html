@@ -1,0 +1,106 @@
+‎<?php
+‎// **********************************************
+‎// 1. إعدادات التوجيه (REQUIRED SETTINGS)
+‎// **********************************************
+‎
+‎// ** 1-1. رابط Smartlink الخاص بك **
+‎// ضع رابط Adsterra Smartlink الخاص بك هنا
+‎$smartlink_url = "https://otieu.com/4/10119364"; 
+‎
+‎// ** 1-2. مدة التأخير بالثواني (2 ثانية) **
+‎// قيمة 2 تعني ثانيتين. يمكنك تغييرها إلى أي رقم صحيح
+‎$delay_seconds = 2; 
+‎
+‎// تحويل الثواني إلى ميكروثانية لـ usleep()
+‎$delay_microseconds = $delay_seconds * 1000000;
+‎
+‎// **********************************************
+‎// 2. تنفيذ التأخير والتوجيه (EXECUTION)
+‎// **********************************************
+‎
+‎// توقيف تنفيذ السكربت للمدة المحددة (يتم على الخادم قبل إرسال المحتوى)
+‎usleep($delay_microseconds);
+‎
+‎// إرسال رأس (Header) التوجيه إلى المتصفح
+‎// نوع 301 أو 302: يُفضل 302 (Moved Temporarily) هنا للتوجيه المؤقت
+‎header("Location: " . $smartlink_url, true, 302);
+‎exit(); // إنهاء السكربت بعد التوجيه لضمان عدم تحميل أي محتوى إضافي
+‎
+‎// ملاحظة: إذا كان التوجيه من جانب الخادم لا يعمل فوراً على خادمك،
+‎// يمكنك إزالة كود usleep() والتأخير، وجعله توجيهاً فورياً بـ 302.
+‎
+‎?>
+‎<!DOCTYPE html>
+‎<html lang="ar" dir="rtl">
+‎<head>
+‎    <meta charset="UTF-8">
+‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+‎    <title>جارِ التوجيه، يرجى الانتظار...</title>
+‎    
+‎    <style>
+‎        body {
+‎            display: flex;
+‎            flex-direction: column;
+‎            justify-content: center;
+‎            align-items: center;
+‎            min-height: 100vh;
+‎            margin: 0;
+‎            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+‎            color: #ffffff;
+‎            text-align: center;
+‎            /* خلفية متدرجة ملونة */
+‎            background: linear-gradient(135deg, #6dd5ed, #2193b0); 
+‎            background-size: 400% 400%;
+‎            animation: gradientAnimation 15s ease infinite;
+‎        }
+‎
+‎        @keyframes gradientAnimation {
+‎            0% { background-position: 0% 50%; }
+‎            50% { background-position: 100% 50%; }
+‎            100% { background-position: 0% 50%; }
+‎        }
+‎
+‎        .container {
+‎            background-color: rgba(0, 0, 0, 0.3);
+‎            padding: 50px;
+‎            border-radius: 15px;
+‎            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+‎            max-width: 90%;
+‎            animation: fadeInScale 1s ease-out forwards;
+‎        }
+‎        
+‎        @keyframes fadeInScale {
+‎            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+‎            to { opacity: 1; transform: translateY(0) scale(1); }
+‎        }
+‎
+‎        h1 {
+‎            font-size: 2.8em;
+‎            margin-bottom: 20px;
+‎            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+‎        }
+‎        p {
+‎            font-size: 1.3em;
+‎        }
+‎        .loading-text {
+‎            font-size: 1.5em;
+‎            font-weight: bold;
+‎            display: inline-block;
+‎            animation: pulse 1.5s infinite alternate;
+‎        }
+‎        
+‎        @keyframes pulse {
+‎            from { transform: scale(1); opacity: 1; }
+‎            to { transform: scale(1.05); opacity: 0.8; }
+‎        }
+‎    </style>
+‎</head>
+‎<body>
+‎    <div class="container">
+‎        <h1>✨ مرحبًا بك!</h1>
+‎        <p>جارِ إعداد أفضل تجربة لك. سيتم توجيهك الآن.</p>
+‎        <p class="loading-text">🚀 يرجى الانتظار...</p>
+‎    </div>
+‎</body>
+‎</html>
+‎
